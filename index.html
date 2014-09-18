@@ -18,8 +18,8 @@
       <div class="inner">
 
         <header>
-          <h1>Htowned</h1>
-          <h2>A distribution of my Facebook friends’ hometowns on the World Map.</h2>
+          <h1>HTowned</h1>
+          <h2>A distribution of my Facebook friends' hometowns on the World Map.</h2>
         </header>
 
         <section id="downloads" class="clearfix">
@@ -29,44 +29,70 @@
         </section>
 
         <hr>
+          <section id="main_content">
+          <p>A small python script which generates the kml file having the coordinates of the hometowns of my FB friends. This kml file is then fed to the <a href="http://indiemapper.com/">indiemapper</a> to plot all the points on the world map.</p>
 
-        <section id="main_content">
-          <h3>
-<a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a>Welcome to GitHub Pages.</h3>
+            <h3>
+              <a name="Distribution" class="anchor" href="#Distribution"><span class="octicon octicon-link"></span></a>Distribution
+            </h3>
 
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
+          <img src="images/friends04.jpg" alt="Friends' View" style="width:800px;height:600px">
+          <img src="images/friends05.jpg" alt="Friends' View" style="width:800px;height:600px">
 
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
+            <h3>
+              <a name="Tools used" class="anchor" href="#Tools-used"><span class="octicon octicon-link"></span></a>Tools used- 
+            </h3>
+          1. <a href="https://developers.facebook.com/docs/graph-api/">facebook graph API</a> (using facepy)  </br>
+          2. <a href="https://developers.google.com/maps/documentation/javascript/geocoding?hl=en">google geocoding service
+              </a> (using geopy)  </br>
+          3. <a href="http://indiemapper.com/">indiemapper</a>
+          </br></br>
+
+            <h3>
+              <a name="Requirements" class="anchor" href="#Requirements"><span class="octicon octicon-link"></span></a>Requirements-
+            </h3>
+        Install requirements by running,
+<pre><code>$ pip install facepy
+$ pip install simplekml
+$ pip install geopy
 </code></pre>
 
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
+  <h3><a name="What is it doing?" class="anchor" href="#What is it doing?"><span class="octicon octicon-link"></span></a>What is it doing?</h3>
+
+              <p>
+              It is using <em>facepy</em> which uses <strong>facebook graph API</strong> to fetch the results from Facebook. It has to be given an <em>access_token</em> (your access token, not mine) which will authenticate the script to fetch results on your behalf.  
+              </br></br>
+              After fetching the hometowns of each friend it uses the <strong>google geocoding service</strong> via <em>geopy</em> to convert the hometowns into lattitudes and longitudes.  
+              </br></br>
+              These lats and longs are then written in a <em>friends_hometown.kml</em> file using the <em>simplekml</em> module. The <a href="https://en.wikipedia.org/wiki/Keyhole_Markup_Language">kml</a> (keyhole markup language) is an XML notation for expressing geographic annotation and visualization within Internet-based, two-dimensional maps and three-dimensional Earth browsers (It's the wiki definition BTW ;)).
+              </br></br>
+              Now, that we have our data in the required format we can plot it however we want. I just wanted to plot them on the World map, so I used [Indiemapper][4], which is a good mapping platform if you have the data.
+              </p>
 
 <h3>
-<a name="designer-templates" class="anchor" href="#designer-templates"><span class="octicon octicon-link"></span></a>Designer Templates</h3>
+<a name="Inspiration" class="anchor" href="#Inspiration"><span class="octicon octicon-link"></span></a>Inspiration</h3>
 
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
-
-<h3>
-<a name="rather-drive-stick" class="anchor" href="#rather-drive-stick"><span class="octicon octicon-link"></span></a>Rather Drive Stick?</h3>
-
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
+<p>
+  Inspiration for this mini project was obtained when I was reading a few answers on <a href="https://www.quora.com/What-are-the-best-Python-scripts-youve-ever-written">this</a> question asked on Quora. This question have 98 answers as of today. There are many bullshit answers but some are interesting. From the 2nd part of <a href="http://qr.ae/aNa1J">this answer</a> where the bus travelers all over India on a day are plotted. This sparked an idea in my mind. </br>
+  How I reached the hometowns was due to my mother who was asking about the hailing places of my friends. Please don't ask me why?  Even I don't know why.
+</p>
 
 <h3>
-<a name="authors-and-contributors" class="anchor" href="#authors-and-contributors"><span class="octicon octicon-link"></span></a>Authors and Contributors</h3>
+<a name="TODO" class="anchor" href="#todo"><span class="octicon octicon-link"></span></a>To/Can be done...</h3>
 
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
+<p>There are a few things which can be done here. These things wont be of much magnitude but might help in beautifying the distribution images.</p>
 
-<h3>
-<a name="support-or-contact" class="anchor" href="#support-or-contact"><span class="octicon octicon-link"></span></a>Support or Contact</h3>
+1. Try the above distribution with <strong>D3</strong>. There are very pretty visualizations which can be done by the D3. Although I have heard D3's learning curve is steep.</br></br>
+2. Along with the distribution points display <strong>name of the place</strong> being marked on the map (or some hover kind of thing).</br></br>
+3. Since I only have 100 FB friends and all are form India, I couldn't make the distribution over the whole World Map. Will try this later in life when I will be having more diversified friends (or I can try the script with someone who just makes FB friends blindly).</br></br>
 
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
+
+SR.
         </section>
 
         <footer>
-          Htowned is maintained by <a href="https://github.com/TrigonaMinima">TrigonaMinima</a><br>
-          This page was generated by <a href="http://pages.github.com">GitHub Pages</a>. Tactile theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.
+          HTowned is maintained by <a href="https://github.com/TrigonaMinima">TrigonaMinima</a><br>
+          This page was partially generated by <a href="http://pages.github.com">GitHub Pages</a>.
         </footer>
 
                   <script type="text/javascript">
