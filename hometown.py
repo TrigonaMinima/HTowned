@@ -1,19 +1,40 @@
-import facebook as fb
-from geopy import geocoders
+from facepy import GraphAPI
+from geopy.geocoders import Nominatim
 import simplekml
 
-token = 'CAACEdEose0cBAP0JvJZBqneBbdljE1AFHrCBb6ShaYhAFygl33SgyDXxs3z5QW4i60mZBbtXIiCZA1o9LkxNly0IAEDAouGAjFFZAIywONKlGdS34nJLGlnMg3b3ZAFpx2ctmGZB9rZCYQBthAfrnRzOoLZAZAehFC84r3vhWtvoQE0Mv17CDAZCsZBiENYrBokKI5X8wMZAmmCOi7BZCNA2CopnP'
+token = 'access token'
 
-graph = fb.GraphAPI(token)
-maps = geocoders.GoogleV3()
-kml = simplekml.Kml()
+graph = GraphAPI(token)
+geolocator = Nominatim()
 
-friends = graph.get_connections("me", "friends")
+friendsAndMe = [graph.get("me")]
+pages = graph.get("me/friends", page=True)
+for page in pages:
+    for friend in page['data']:
+        friendsAndMe.append(friend)
 
-for friend in friends['data']:
-    p = graph.get_object(friend['id'])
+hometown = {}
+location = {}
+
+for friend in friendsAndMe:
+    p = graph.get(friend['id'])
     if 'hometown' in p:
-        place, (lat, lng) = maps.geocode(p['hometown']['name'].encode('utf-8'))
-        kml.newpoint(coords=[(lng, lat)])
+        ht = p['hometown']['name']
+        if ht not in hometown:
+            place = geolocator.geocode(ht, timeout=5)
+            hometown[ht] = place.raw
+    if 'location' in p:
+        lc = p['location']['name']
+        if lc not in location:
+            place = geolocator.geocode(lc, timeout=5)
+            location[lc] = place.raw
 
+kml = simplekml.Kml()
+for i in hometown:
+    kml.newpoint(name=i, coords=[(hometown[i]['lon'], hometown[i]['lat'])])
 kml.save("friends_hometown.kml")
+
+kml = simplekml.Kml()
+for i in location:
+    kml.newpoint(name=i, coords=[(location[i]['lon'], location[i]['lat'])])
+kml.save("friends_location.kml")

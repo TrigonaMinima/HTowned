@@ -4,8 +4,8 @@ HTowned
 A small python script which generates the kml file having the coordinates of the hometowns of my FB friends. This kml file is then fed to the [indiemapper](indiemapper.com/app/) to plot all the points on the world map.
 
 Tools used-  
-1. [facebook graph API][1] (using facepy)  
-2. [google geocoding service][2] (using geopy)  
+1. [facebook graph API][1] (using [facepy][6])  
+2. [google geocoding service][2] (using [geopy][5])  
 3. [indiemapper][4]
 
 ###Requirements-  
@@ -31,3 +31,5 @@ Now, that we have our data in the required format we can plot it however we want
 [2]: https://developers.google.com/maps/documentation/javascript/geocoding?hl=en
 [3]: https://en.wikipedia.org/wiki/Keyhole_Markup_Language
 [4]: http://indiemapper.com/
+[5]: http://geopy.readthedocs.org/en/latest/
+[6]: http://facepy.readthedocs.org/en/latest/usage/graph-api.html
